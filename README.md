@@ -1,6 +1,6 @@
-# [My name is jeff] (https://media0.giphy.com/media/S2xwpUDICFkqc/giphy.gif?cid=ecf05e4778pjn73sn8zxq68nofsodzeaiaec2kpoiilxu19v&rid=giphy.gif&ct=g)
+# [My name is jeff](https://media0.giphy.com/media/S2xwpUDICFkqc/giphy.gif?cid=ecf05e4778pjn73sn8zxq68nofsodzeaiaec2kpoiilxu19v&rid=giphy.gif&ct=g)
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
+
 
 > 🧑‍🚀 **Seasoned astronaut?** i'll never Delete this file. 4eva Have'n fun!
 

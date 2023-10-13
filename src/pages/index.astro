@@ -1,74 +1,264 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
+	import MainHead from '../components/MainHead.astro';
+	import Card from '../components/Card.astro';
+	import Button from '../components/Button/index.jsx';
+	import Nav from '../components/Nav/index.jsx';
+	import Footer from '../components/Footer/index.jsx';
+	import SitePreview from '../components/SitePreview/index.jsx';
+
+	// Data Fetching: List all Markdown posts in the repo.
+	const projects = await Astro.glob('./project/**/*.md');
+	const featuredProject = projects[0];
+	// Full Astro Component Syntax:
+// https://docs.astro.build/core-concepts/astro-components/
 ---
-<Layout title="NAME JEFF">
-	<main>
-		<h1 class="text-3xl font-bold">my name is <span class="text-gradient">jeff</span></h1>
-		<p class="instructions">
-			Check out some <strong><code>super~cool pages</code></strong> i've made...recently 😅 that are still live
-		</p>
-		<ul role="list" class="animate__animated animate__bounce link-card-grid">
-			<Card href="https://irb0gie.vercel.app" title="irb0gie 🫣" body="yeah you probably came from there not to long ago 🙃 or probably not hehe who knows 🙃" /> 
-			<Card href="https://som-landing.glitch.me/" title="som🏫🐠landing" body="we may all be different 🐟 but in this 🏫 we swim together" /> 
-			<Card href="https://adaptogen.247420.xyz/" title="adaptogen🦠" body="swagtag's evolution, live on Polygon Main net" /> 
-			<Card href="https://schwepe.co.za/" title="schwepe: the experience" body="❤️" />
-			
-		</ul>
+
+<html lang="en">
+
+<head>
+	<MainHead title="My Name is: Jeff" description="Jeff: meta~sona for the { techshaman } szabo0genie a.k.a b0gie" />
+	<style lang="scss">
+		$w-s: 750px;
+
+		.hero {
+			position: relative;
+			overflow: hidden;
+
+			@media (min-width: $w-s) {
+				height: 45vw;
+			}
+		}
+
+		.img {
+			display: block;
+			width: 100%;
+			height: auto;
+		}
+
+		.gradient,
+		.gradient2 {
+			background-image: url('/assets/mesh-gradient.jpg');
+			background-size: cover;
+			pointer-events: none;
+			mix-blend-mode: screen;
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 2;
+		}
+
+		.gradient2 {
+			mix-blend-mode: multiply;
+			background-size: cover;
+		}
+
+		.overlay {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: 10;
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			justify-content: center;
+			padding-left: 2rem;
+
+			@media (min-width: $w-s) {
+				padding-left: 4rem;
+			}
+		}
+
+		.title {
+			font-weight: 900;
+			font-size: var(--f-u8);
+			margin-bottom: 0.5rem;
+			margin-top: 0;
+
+			@media (min-width: $w-s) {
+				font-size: var(--f-u12);
+			}
+		}
+
+		.grid {
+			display: grid;
+			grid-gap: 2rem;
+
+			@media (min-width: 1200px) {
+				grid-template-columns: 2fr 1fr;
+			}
+		}
+
+		.sectionTitle {
+			font-weight: 700;
+			font-size: var(--f-u8);
+			margin-top: 4rem;
+			margin-bottom: 2rem;
+		}
+
+		.role {
+			position: relative;
+			display: inline-block;
+			font-weight: 900;
+			color: var(--t-bg);
+			background-color: var(--t-fg);
+			padding: 0.25em 0.5em;
+			z-index: 2;
+
+			@media (min-width: $w-s) {
+				font-size: var(--f-u3);
+			}
+
+			+.role {
+				margin-left: 1em;
+			}
+
+			&:nth-of-type(1) {
+				.invert {
+					background-color: var(--c-pink);
+				}
+			}
+
+			&:nth-of-type(2) {
+				.invert {
+					background-color: var(--c-blue);
+				}
+			}
+
+			&:nth-of-type(3) {
+				.invert {
+					background-color: var(--c-green);
+				}
+			}
+
+			&:hover {
+				.invert {
+					clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+				}
+			}
+		}
+
+		.invert {
+			position: absolute;
+			color: var(--t-fg);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			pointer-events: none;
+			clip-path: polygon(0% 100%, 100% 100%, 100% 200%, 0% 200%);
+			transition: clip-path cubic-bezier(0.4, 0, 0.5, 1) 150ms;
+		}
+
+		.desc {
+			font-size: var(--f-u2);
+			margin-top: 1.5rem;
+			margin-bottom: 0;
+		}
+
+		.subtitle {
+			display: block;
+			font-weight: 400;
+			font-size: var(--f-d6);
+			letter-spacing: -0.0625em;
+		}
+
+		.bio {
+			line-height: 2;
+			margin-bottom: 2rem;
+
+			>span:first-of-type {
+				line-height: 1;
+				margin-bottom: 0.5em;
+				display: block;
+				font-weight: 700;
+				font-size: var(--f-u4);
+			}
+		}
+
+		.text-gradient {
+			font-weight: 900;
+			background-image: var(--astro-gradient);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+			background-size: 100% 200%;
+			background-position-y: 100%;
+			border-radius: 0.4rem;
+			animation: pulse 4s ease-in-out infinite;
+		}
+
+		@keyframes pulse {
+
+			0%,
+			100% {
+				background-position-y: 0%;
+			}
+
+			50% {
+				background-position-y: 80%;
+			}
+		}
+
+		.link-card-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
+			gap: 1rem;
+			padding: 0;
+		}
+	</style>
+</head>
+
+<body>
+	<Nav />
+	<header class="hero">
+		<img width="1600" height="1131" class="img"
+			src="https://thumbs.gfycat.com/UniquePlushBird-size_restricted.gif" />
+		<div class="gradient"></div>
+		<div class="gradient2"></div>
+		<div class="overlay">
+			<h1 class="title">
+				<small class="subtitle">My name is</small>Jeff Jeeves
+			</h1>
+			<div>
+				<span class="role">👩‍💻 Web3 <span class="invert">🧞 Genie</span></span>&nbsp;
+				<span class="role">🤔 Improv <span class="invert">🎤 Rapper</span></span>&nbsp;
+				<span class="role">🪄 Creative <span class="invert">✏️ Writer</span></span>
+			</div>
+			<p class="desc">Lover of tech, travel, and the moment.</p>
+		</div>
+	</header>
+	<main class="wrapper mt4 mb4">
+		<div class="grid">
+			<div class="section">
+				<h3 class="sectionTitle">Fresh pick</h3>
+				<SitePreview project={featuredProject} />
+				<div class="tac mt4">
+					<a href="/projects">
+						<Button>Check out the goods 📦</Button>
+					</a>
+				</div>
+			</div>
+			<div class="section">
+				<h3 class="sectionTitle">About me..Jeff</h3>
+				<p class="bio">
+					<span>henl0!</span> i r Jeff, and this is my website. It was made using{' '}
+					<a href="https://github.com/withastro/astro" target="_blank" rel="nofollow"> Astro</a>,
+					a new way to build static sites. I took this example and modified
+				</p>
+				<p>
+					<a href="/about">Read more</a>
+				</p>
+			</div>
+		</div>
+
 	</main>
-</Layout>
+	<Footer />
+</body>
 
-<style>
-	:root {
-		--astro-gradient: linear-gradient(0deg,#4F39FA, #DA62C4);
-	}
-
-	h1 {
-		margin: 2rem 0;
-	}
-
-	main {
-		margin: auto;
-    	padding: 1em;
-		max-width: 60ch;
-		
-	}
-
-	.text-gradient {
-		font-weight: 900;
-		background-image: var(--astro-gradient);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-size: 100% 200%;
-		background-position-y: 100%;
-		border-radius: 0.4rem;
-		animation: pulse 4s ease-in-out infinite;
-	}
-
-	@keyframes pulse {
-		0%, 100% { background-position-y: 0%; }
-		50% { background-position-y: 80%; }
-	}
-
-	.instructions {
-		line-height: 1.6;
-		margin: 1rem 0;
-		background: #4F39FA;
-		padding: 1.0rem;
-		border-radius: 0.4rem;
-		color: var(--color-bg);
-	}
-
-	.instructions code {
-		font-size: 0.875em;
-		border: 0.1em solid var(--color-border);
-		border-radius: 4px;
-		padding: 0.15em 0.25em;
-	}
-	.link-card-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
-		gap: 1rem;
-		padding: 0;
-	}
-</style>
+</html>

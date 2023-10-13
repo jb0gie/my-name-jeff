@@ -1,0 +1,24 @@
+---
+	import '../styles/global.scss';
+	const {
+		title = 'My name is: Jeff',
+		description = 'a collection of sites built by b0gie',
+	} = Astro.props;
+---
+
+<meta charset="UTF-8" />
+<meta name="description" property="og:description" content={description} />
+<meta name="viewport" content="width=device-width" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://namejeff.247420.xyz" />
+<meta property="og:image" content="https://cdn.discordapp.com/emojis/969279547633696798.webp" />
+<meta property="og:description" content="a list of sites irb0gie made in 2022" />
+<meta name="theme-color" content="#FF0000">
+<meta name="generator" content={Astro.generator} />
+
+<title>{title}</title>
+
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;700;900&display=swap" rel="stylesheet" />
